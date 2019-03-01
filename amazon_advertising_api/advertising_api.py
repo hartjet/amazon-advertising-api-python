@@ -173,6 +173,22 @@ class AdvertisingApi(object):
         """
         interface = 'profiles'
         return self._operation(interface, data, method='PUT')
+    
+    def list_portfolios(self, data=None):
+        interface = 'portfolios'
+        return self._operation(interface, data)
+    
+    def get_portfolio(self, portfolio_id):
+        interface = 'portfolios/{}'. format(portfolio_id)
+        return self._operation(interface)
+
+    def create_portfolios(self, data):
+        interface = 'portfolios'
+        return self._operation(interface, data, method='POST')
+
+    def update_portfolios(self, data):
+        interface = 'portfolios'
+        return self._operation(interface, data, method='PUT')
 
     def get_campaign(self, campaign_id, campaign_type='sp'):
         """
