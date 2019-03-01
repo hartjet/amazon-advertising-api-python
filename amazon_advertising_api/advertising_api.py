@@ -1017,11 +1017,12 @@ class AdvertisingApi(object):
     def get_report(self, report_id):
         interface = 'reports/{}'.format(report_id)
         res = self._operation(interface)
-        if res['success']:
-            body = json.loads(res['response'])
-            if body.get('status') == 'SUCCESS':
-                res = self._download(location=body['location'])
-        return res
+        if res['code'] == 200 and json.loads(res['response'])['status'] == 'SUCCESS':
+            res = self._download(
+                location=json.loads(res['response'])['location'])
+            return res
+        else:
+            return res
 
     def get_snapshot(self, snapshot_id):
         interface = 'snapshots/{}'.format(snapshot_id)
