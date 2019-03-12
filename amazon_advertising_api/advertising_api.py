@@ -996,9 +996,7 @@ class AdvertisingApi(object):
           Defaults to 'sponsoredProducts.
         """
         if not data:
-            data = {'campaignType': 'sponsoredProducts'}
-        elif not data.get('campaignType'):
-            data['campaignType'] = 'sponsoredProducts'
+            data = {}
 
         if record_type is not None:
             interface = '{}/{}/snapshot'.format(campaign_type, record_type)
