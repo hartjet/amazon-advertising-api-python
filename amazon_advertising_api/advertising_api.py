@@ -173,11 +173,11 @@ class AdvertisingApi(object):
         """
         interface = 'profiles'
         return self._operation(interface, data, method='PUT')
-    
+
     def list_portfolios(self, data=None):
         interface = 'portfolios'
         return self._operation(interface, data)
-    
+
     def get_portfolio(self, portfolio_id):
         interface = 'portfolios/{}'. format(portfolio_id)
         return self._operation(interface)
@@ -505,29 +505,10 @@ class AdvertisingApi(object):
 
     def get_target(self, target_id):
         """
-        Retrieves an ad group by Id. Note that this call returns the minimal
-        set of ad group fields, but is more efficient than getAdGroupEx.
+        Retrieves a target by Id. Note that this call returns the minimal
+        set of fields, but is more efficient than getTargetEx.
 
         :GET: /sp/targets/{targetId}
-        :param target_id: The Id of the requested ad group.
-        :type target_id: string
-
-        :returns:
-            :200: Success, Target response
-            :401: Unauthorized
-            :404: Ad group not found
-        """
-        interface = 'sp/targets/{}'.format(ad_group_id)
-        return self._operation(interface)
-
-    def get_target_ex(self, target_id):
-        """
-        Retrieves a target and its extended fields by ID. Note that this
-        call returns the complete set of target fields (including serving
-        status and other read-only fields), but is less efficient than
-        getTarget.
-
-        :GET: /sp/targets/extended/{adGroupId}
         :param target_id: The Id of the requested target.
         :type target_id: string
 
@@ -536,9 +517,30 @@ class AdvertisingApi(object):
             :401: Unauthorized
             :404: Target not found
         """
-        interface = 'sp/targets/extended/{}'.format(ad_group_id)
+        interface = 'sp/targets/{}'.format(target_id)
         return self._operation(interface)
 
+    # todo - remove?
+    def get_target_ex(self, target_id):
+        """
+        Retrieves a target and its extended fields by ID. Note that this
+        call returns the complete set of target fields (including serving
+        status and other read-only fields), but is less efficient than
+        getTarget.
+
+        :GET: /sp/targets/extended/{target_id}
+        :param target_id: The Id of the requested target.
+        :type target_id: string
+
+        :returns:
+            :200: Success, Target response
+            :401: Unauthorized
+            :404: Target not found
+        """
+        interface = 'sp/targets/extended/{}'.format(target_id)
+        return self._operation(interface)
+
+    # todo - remove?
     def create_targets(self, data):
         """
         Creates one or more ad groups. Successfully created ad groups will
@@ -556,6 +558,7 @@ class AdvertisingApi(object):
         interface = 'targets'
         return self._operation(interface, data, method='POST')
 
+    # todo - remove?
     def update_targets(self, data):
         """
         Updates one or more targets. Targets are identified using their
@@ -574,6 +577,7 @@ class AdvertisingApi(object):
         interface = 'targets'
         return self._operation(interface, data, method='PUT')
 
+    # todo - remove?
     def archive_target(self, ad_group_id):
         """
         Sets the ad group status to archived. This same operation can be
@@ -591,6 +595,7 @@ class AdvertisingApi(object):
         interface = 'targets/{}'.format(target_id)
         return self._operation(interface, method='DELETE')
 
+    # todo - remove?
     def list_targets(self, data=None):
         """
         Retrieves a list of targets satisfying optional criteria.
@@ -629,6 +634,7 @@ class AdvertisingApi(object):
         interface = 'sp/targets'
         return self._operation(interface, data)
 
+    # todo - remove?
     def list_targets_ex(self, data=None):
         """
         Retrieves a list of targets satisfying optional criteria.
@@ -667,6 +673,7 @@ class AdvertisingApi(object):
         interface = 'sp/targets/extended'
         return self._operation(interface, data)
 
+    # todo - remove?
     def get_negative_target(self, target_id):
         """
         Retrieves an ad group by Id. Note that this call returns the minimal
@@ -684,6 +691,7 @@ class AdvertisingApi(object):
         interface = 'sp/negativeTargets/{}'.format(ad_group_id)
         return self._operation(interface)
 
+    # todo - remove?
     def get_negative_target_ex(self, target_id):
         """
         Retrieves a target and its extended fields by ID. Note that this
@@ -703,6 +711,7 @@ class AdvertisingApi(object):
         interface = 'sp/negativeTargets/extended/{}'.format(ad_group_id)
         return self._operation(interface)
 
+    # todo - remove?
     def create_negative_targets(self, data):
         """
         Creates one or more ad groups. Successfully created ad groups will
@@ -720,6 +729,7 @@ class AdvertisingApi(object):
         interface = 'negativeTargets'
         return self._operation(interface, data, method='POST')
 
+    # todo - remove?
     def update_negative_targets(self, data):
         """
         Updates one or more negativeTargets. negativeTargets are identified using their
@@ -738,6 +748,7 @@ class AdvertisingApi(object):
         interface = 'negativeTargets'
         return self._operation(interface, data, method='PUT')
 
+    # todo - remove?
     def archive_negative_target(self, ad_group_id):
         """
         Sets the ad group status to archived. This same operation can be
@@ -755,6 +766,7 @@ class AdvertisingApi(object):
         interface = 'negativeTargets/{}'.format(target_id)
         return self._operation(interface, method='DELETE')
 
+    # todo - remove?
     def list_negative_targets(self, data=None):
         """
         Retrieves a list of negativeTargets satisfying optional criteria.
@@ -793,6 +805,7 @@ class AdvertisingApi(object):
         interface = 'sp/negativeTargets'
         return self._operation(interface, data)
 
+    # todo - remove?
     def list_negative_targets_ex(self, data=None):
         """
         Retrieves a list of negativeTargets satisfying optional criteria.
@@ -830,6 +843,36 @@ class AdvertisingApi(object):
         """
         interface = 'sp/negativeTargets/extended'
         return self._operation(interface, data)
+
+    def create_search_terms(self, data):
+        """
+        Creates one search terms report.
+
+        :POST: /targets/report
+        :param data: keyword search terms report to be created.
+        :type data: dictionary
+
+        :returns:
+            :202: report response
+            :401: Unauthorized
+        """
+        interface = 'sp/targets/report'
+        return self._operation(interface, data, method='POST')
+
+    def create_search_terms_old(self, data):
+        """
+        Creates one search terms report.
+
+        :POST: /keywords/report
+        :param data:  keyword search terms report to be created.
+        :type data: dictionary
+
+        :returns:
+            :202: report response
+            :401: Unauthorized
+        """
+        interface = 'sp/keywords/report'
+        return self._operation(interface, data, method='POST')
 
     def get_biddable_keyword(self, keyword_id, campaign_type='sp'):
         """
