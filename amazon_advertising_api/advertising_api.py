@@ -556,7 +556,7 @@ class AdvertisingApi(object):
                 order as the input
             :401: Unauthorized
         """
-        interface = 'targets'
+        interface = 'sp/targets'
         return self._operation(interface, data, method='POST')
 
     # todo - remove?
@@ -575,7 +575,7 @@ class AdvertisingApi(object):
                 order as the input
             :401: Unauthorized
         """
-        interface = 'targets'
+        interface = 'sp/targets'
         return self._operation(interface, data, method='PUT')
 
     # todo - remove?
@@ -593,7 +593,7 @@ class AdvertisingApi(object):
             :401: Unauthorized
             :404: Ad group not found
         """
-        interface = 'targets/{}'.format(target_id)
+        interface = 'sp/targets/{}'.format(target_id)
         return self._operation(interface, method='DELETE')
 
     # todo - remove?
