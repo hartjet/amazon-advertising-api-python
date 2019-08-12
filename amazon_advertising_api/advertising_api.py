@@ -53,6 +53,7 @@ class AdvertisingApi(object):
             versions['application_version'])
         self.profile_id = profile_id
         self.token_url = None
+        self.sandbox = sandbox
 
         if region in regions:
             if sandbox:
@@ -1170,6 +1171,9 @@ class AdvertisingApi(object):
                    'Amazon-Advertising-API-ClientId': self.client_id,
                    'Content-Type': 'application/json',
                    'User-Agent': self.user_agent}
+
+        if self.sandbox:
+            headers['BIDDING_CONTROLS_ON'] = 'true'
 
         if self.profile_id is not None and self.profile_id != '':
             headers['Amazon-Advertising-API-Scope'] = self.profile_id
