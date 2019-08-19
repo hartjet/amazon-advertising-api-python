@@ -596,43 +596,24 @@ class AdvertisingApi(object):
         interface = 'sp/targets/{}'.format(target_id)
         return self._operation(interface, method='DELETE')
 
-    # todo - remove?
     def list_targets(self, data=None):
-        """
-        Retrieves a list of targets satisfying optional criteria.
-
-        :GET: /sp/targets
-        :param data: Parameter list of criteria.
-
-        data may contain the following optional parameters:
-
-        :param startIndex: 0-indexed record offset for the result
-            set. Defaults to 0.
-        :type startIndex: integer
-        :param count: Number of records to include in the paged response.
-            Defaults to max page size.
-        :type count: integer
-        :param expressionTypeFilter: Restricts results to targets
-            with expression types within the specified comma-separated list.
-            Possible filter types are: auto and manual
-        :type expressionTypeFilter: string
-        :param expressionTextFilter: Content of the targeting expression
-        :type expressionTextFilter: string
-        :param campaignIdFilter: Restricts results to ad groups within
-            campaigns specified in comma-separated list.
-        :type campaignIdFilter: string
-        :param adGroupIdFilter: Restricts results to ad groups specified in
-            comma-separated list.
-        :type adGroupIdFilter: string
-        :param stateFilter: Restricts results to targets with state within the
-            specified comma-separatedlist. Must be one of enabled, paused,
-            archived.  Default behavior is to include all.
-        :type stateFilter: string
-        :returns:
-            :200: Success. List of Targets.
-            :401: Unauthorized.
-        """
         interface = 'sp/targets'
+        return self._operation(interface, data)
+
+    def list_target_brands(self, data=None):
+        interface = 'sp/targets/brands'
+        return self._operation(interface, data)
+
+    def list_target_categories(self, data=None):
+        interface = 'sp/targets/categories'
+        return self._operation(interface, data)
+
+    def refine_target_categories(self, data=None):
+        interface = 'sp/targets/categories/refinements'
+        return self._operation(interface, data)
+
+    def list_target_product_recommendations(self, data=None):
+        interface = 'sp/targets/productRecommendations'
         return self._operation(interface, data)
 
     # todo - remove?
