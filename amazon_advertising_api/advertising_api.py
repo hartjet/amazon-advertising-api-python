@@ -614,7 +614,7 @@ class AdvertisingApi(object):
 
     def list_target_product_recommendations(self, data=None):
         interface = 'sp/targets/productRecommendations'
-        return self._operation(interface, data)
+        return self._operation(interface, data, method='POST')
 
     # todo - remove?
     def list_targets_ex(self, data=None):
