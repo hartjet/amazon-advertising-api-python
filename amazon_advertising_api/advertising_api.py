@@ -1078,11 +1078,9 @@ class AdvertisingApi(object):
         interface = 'adGroups/{}/bidRecommendations'.format(ad_group_id)
         return self._operation(interface)
 
-    def get_keyword_bid_recommendations(self, keyword_id=None, keyword_data=None):
+    def get_keyword_bid_recommendations(self, ad_group_id, keywords):
         """
         Request bid recommendations for:
-
-        * a specified keyword
         * a list of up to 100 keywords
 
         A list of keywords must be in the KeywordBidRecommendationsData format:
@@ -1091,7 +1089,14 @@ class AdvertisingApi(object):
         int adGroupId: []
         ```
         """
-        pass
+        interface = 'keywords/bidRecommendations'
+
+        data = {
+            'adGroupId': ad_group_id,
+            'keywords': keywords
+        }
+
+        return self._operation(interface, data, method='POST')
 
     def _download(self, location):
         headers = {'Authorization': 'Bearer {}'.format(self._access_token),
