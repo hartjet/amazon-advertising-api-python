@@ -1098,6 +1098,81 @@ class AdvertisingApi(object):
 
         return self._operation(interface, data, method='POST')
 
+    def get_sb_keyword_bid_recommendations(self, campaign_id, keywords):
+        interface = 'recommendations/bids'
+
+        data = {
+            'campaignId': campaign_id,
+            'keywords': keywords
+        }
+
+        return self._operation(interface, data, method='POST')
+
+    def get_sb_target_bid_recommendations(self, campaign_id, keywords):
+        interface = 'recommendations/bids'
+
+        data = {
+            'campaignId': campaign_id,
+            'targets': keywords
+        }
+
+        return self._operation(interface, data, method='POST')
+
+    def get_bid_recommendations(self, expressions, keywords):
+        """
+        Request bid recommendations for:
+        * a list of up to 100 targets
+        Keywords Example
+        {
+          "expressions": [
+            [
+              {
+                "type": "queryExactMatches",
+                "value": "oranges"
+              }
+            ]
+          ],
+          "adGroupId": 217706707887211
+        }
+
+        Auto Example
+        {
+          "expressions": [
+            [
+              {
+                "type": "queryBroadRelMatches",
+                "value": "apples"
+              }
+            ]
+          ],
+          "adGroupId": 163368712670649
+        }
+
+        {
+          "expressions": [
+            [
+              {
+                "type": "asinCategorySameAs",
+                "value": "166099011"
+              },
+              {
+                "type": "asinReviewRatingBetween",
+                "value": "4.5-5"
+              }
+            ]
+          ],
+          "adGroupId": 163368712670649
+        }
+        """
+        interface = 'targets/bidRecommendations'
+
+        data = {
+            'adGroupId': ad_group_id,
+            'expressions': expressions
+        }
+
+        return self._operation(interface, data, method='POST')
+
     def _download(self, location):
         headers = {'Authorization': 'Bearer {}'.format(self._access_token),
                    'Content-Type': 'application/json',
