@@ -909,8 +909,13 @@ class AdvertisingApi(object):
         interface = 'keywords'
         return self._operation(interface, data, method='POST')
 
-    def update_biddable_keywords(self, data):
-        interface = 'keywords'
+    def update_biddable_keywords(self, data, campaign_type='sp'):
+        # interface = 'keywords'
+        if campaign_type == 'hsa':
+            campaign_type = 'sb'
+        interface = '{}/keywords'.format(campaign_type)
+        if campaign_type == 'sb':
+            return self._operation(interface, data, method='PUT', ignore_version=True)
         return self._operation(interface, data, method='PUT')
 
     def archive_biddable_keyword(self, keyword_id):
@@ -1212,7 +1217,7 @@ class AdvertisingApi(object):
                     'code': e.code,
                     'response': '{msg}: {details}'.format(msg=e.msg, details=e.read())}
 
-    def _operation(self, interface, params=None, method='GET'):
+    def _operation(self, interface, params=None, method='GET', ignore_version=False):
         """
         Makes that actual API call.
 
@@ -1252,19 +1257,30 @@ class AdvertisingApi(object):
             else:
                 p = ''
 
-            url = 'https://{host}/{api_version}/{interface}{params}'.format(
-                host=self.endpoint,
-                api_version=self.api_version,
-                interface=interface,
-                params=p)
+            if ignore_version:
+                url = 'https://{host}/{interface}{params}'.format(
+                    host=self.endpoint,
+                    interface=interface,
+                    params=p)
+            else:
+                url = 'https://{host}/{api_version}/{interface}{params}'.format(
+                    host=self.endpoint,
+                    api_version=self.api_version,
+                    interface=interface,
+                    params=p)
         else:
             if params is not None:
                 data = json.dumps(params).encode('utf-8')
 
-            url = 'https://{host}/{api_version}/{interface}'.format(
-                host=self.endpoint,
-                api_version=self.api_version,
-                interface=interface)
+            if ignore_version:
+                url = 'https://{host}/{interface}'.format(
+                    host=self.endpoint,
+                    interface=interface)
+            else:
+                url = 'https://{host}/{api_version}/{interface}'.format(
+                    host=self.endpoint,
+                    api_version=self.api_version,
+                    interface=interface)
 
         if PYTHON == 3:
             req = urllib.request.Request(url=url, headers=headers, data=data)
