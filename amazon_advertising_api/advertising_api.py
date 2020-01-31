@@ -918,6 +918,15 @@ class AdvertisingApi(object):
             return self._operation(interface, data, method='PUT', ignore_version=True)
         return self._operation(interface, data, method='PUT')
 
+    def update_biddable_keywords_sb(self, data, campaign_type='sb'):
+        # interface = 'keywords'
+        if campaign_type == 'hsa':
+            campaign_type = 'sb'
+        interface = '{}/keywords'.format(campaign_type)
+        if campaign_type == 'sb':
+            return self._operation(interface, data, method='PUT', ignore_version=True)
+        return self._operation(interface, data, method='PUT')
+
     def archive_biddable_keyword(self, keyword_id):
         interface = 'keywords/{}'.format(keyword_id)
         return self._operation(interface, method='DELETE')
