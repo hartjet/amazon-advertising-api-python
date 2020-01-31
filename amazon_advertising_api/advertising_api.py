@@ -268,6 +268,11 @@ class AdvertisingApi(object):
         interface = 'campaigns'
         return self._operation(interface, data, method='PUT')
 
+    def update_campaigns_sb(self, data):
+        interface = 'sb/campaigns'
+        return self._operation(interface, data, method='PUT', ignore_version=True)
+
+
     def archive_campaign(self, campaign_id):
         """
         Sets the campaign status to archived. This same operation can be
