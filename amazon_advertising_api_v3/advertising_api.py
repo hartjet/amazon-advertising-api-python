@@ -14,7 +14,7 @@ import gzip
 import json
 
 
-class AdvertisingApi(object):
+class AdvertisingApiV3(object):
     """Lightweight client library for Amazon Sponsored Products API."""
 
     def __init__(self,
