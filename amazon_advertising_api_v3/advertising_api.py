@@ -658,7 +658,7 @@ class AdvertisingApiV3(object):
                     'code': e.code,
                     'response': '{msg}: {details}'.format(msg=e.msg, details=e.read())}
 
-    def _operation(self, interface, params=None, method='GET', version=self.api_version):
+    def _operation(self, interface, params=None, method='GET', version='v2'):
         if version is None:
             use_version = ''
         else:
