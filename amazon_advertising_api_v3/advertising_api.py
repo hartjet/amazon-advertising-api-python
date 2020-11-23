@@ -465,7 +465,7 @@ class AdvertisingApiV3(object):
     """ *********************************************************************
     SP REPORTS
     ********************************************************************* """
-    def request_report(self, record_type, data={}}):
+    def request_report(self, record_type, data={}):
         """
         :POST: /{campaignType}/reports
         """
@@ -483,7 +483,7 @@ class AdvertisingApiV3(object):
     """ *********************************************************************
     SP SNAPSHOTS
     ********************************************************************* """
-    def request_snapshot(self, record_type, data={}}):
+    def request_snapshot(self, record_type, data={}):
         interface = 'sp/{}/snapshot'.format(record_type)
         return self._operation(interface, data, method='POST')
 
