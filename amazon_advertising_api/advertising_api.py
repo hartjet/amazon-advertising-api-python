@@ -1841,34 +1841,34 @@ class AdvertisingApiV3(object):
         return self._operation(interface, data, method='POST')
 
 
-    def request_report(self, record_type=None, report_id=None, data=None, campaign_type='sp'):
-        """
-        :POST: /{campaignType}/reports
-
-        :param campaign_type: The campaignType to request the report for ('sp' or 'hsa')
-          Defaults to 'sp'
-        :type data: string
-        """
-        if record_type is not None:
-            interface = '{}/{}/report'.format(campaign_type, record_type)
-            return self._operation(interface, data, method='POST')
-        elif report_id is not None:
-            interface = 'reports/{}'.format(report_id)
-            return self._operation(interface)
-        else:
-            return {'success': False,
-                    'code': 0,
-                    'response': 'record_type and report_id are both empty.'}
-
-    def get_report(self, report_id):
-        interface = 'reports/{}'.format(report_id)
-        res = self._operation(interface)
-        if res['code'] == 200 and json.loads(res['response'])['status'] == 'SUCCESS':
-            res = self._download(
-                location=json.loads(res['response'])['location'])
-            return res
-        else:
-            return res
+    # def request_report(self, record_type=None, report_id=None, data=None, campaign_type='sp'):
+    #     """
+    #     :POST: /{campaignType}/reports
+    #
+    #     :param campaign_type: The campaignType to request the report for ('sp' or 'hsa')
+    #       Defaults to 'sp'
+    #     :type data: string
+    #     """
+    #     if record_type is not None:
+    #         interface = '{}/{}/report'.format(campaign_type, record_type)
+    #         return self._operation(interface, data, method='POST')
+    #     elif report_id is not None:
+    #         interface = 'reports/{}'.format(report_id)
+    #         return self._operation(interface)
+    #     else:
+    #         return {'success': False,
+    #                 'code': 0,
+    #                 'response': 'record_type and report_id are both empty.'}
+    #
+    # def get_report(self, report_id):
+    #     interface = 'reports/{}'.format(report_id)
+    #     res = self._operation(interface)
+    #     if res['code'] == 200 and json.loads(res['response'])['status'] == 'SUCCESS':
+    #         res = self._download(
+    #             location=json.loads(res['response'])['location'])
+    #         return res
+    #     else:
+    #         return res
 
     def request_snapshot(self, record_type=None, snapshot_id=None, data=None, campaign_type='sp'):
         """
